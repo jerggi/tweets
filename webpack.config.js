@@ -13,9 +13,7 @@ module.exports = {
       proxy: [
             {
                 context: ['/1.1'],
-                // target: 'https://dashboard.virtub.io',
-                // target: 'https://api.twitter.com',
-                target: 'http://localhost:8080',
+                target: 'https://api.twitter.com',
                 secure: false,
                 changeOrigin: true
             }
