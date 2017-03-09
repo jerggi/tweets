@@ -1,4 +1,5 @@
 import * as c from './constants'
+import * as Options from '../utils/constants'
 import * as Api from '../api/appRequests'
 
 //temp
@@ -16,6 +17,20 @@ export const getTweets = (userName) => async dispatch => {
         })
     } catch (err) {
         console.error(err)
+    }
+}
+
+export const sortTweets = (sortOption, orderOption) => dispatch => {
+    if (sortOption === Options.CREATED_AT) {
+        dispatch({
+            type: c.SORT_TWEETS_BY_DATE,
+            payload: { sortOption, orderOption },
+        })
+    } else {
+        dispatch({
+            type: c.SORT_TWEETS_BY_LIKES,
+            payload: { sortOption, orderOption },
+        })
     }
 }
 

@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import { InputGroup, Form, FormControl, Button, Col } from 'react-bootstrap'
+import { InputGroup, FormControl, Button, Col } from 'react-bootstrap'
 
 const SearchForm = ({ userNameChange, submit }) => {
     return (

@@ -7,6 +7,8 @@ import { map } from 'lodash'
 
 import * as AppActions from '../actions/appActions'
 import SearchForm from '../componets/form/Search'
+import SortForm from '../componets/form/Sort'
+import { sortOptions } from '../utils/constants'
 
 class Tweets extends React.Component {
     constructor(props) {
@@ -16,6 +18,7 @@ class Tweets extends React.Component {
         }
         this.userNameChange = this.userNameChange.bind(this)
         this.submitSearch = this.submitSearch.bind(this)
+        this.sortChange = this.sortChange.bind(this)
     }
 
     userNameChange(userName) {
@@ -29,6 +32,13 @@ class Tweets extends React.Component {
         getTweets(userName)
     }
 
+    sortChange(option) {
+        const { actions: { sortTweets } } = this.props
+        const options = sortOptions[option]
+
+        sortTweets(options.sortOption, options.orderOption)
+    }
+
     render() {
         const { tweets } = this.props
 
@@ -38,6 +48,11 @@ class Tweets extends React.Component {
                     <Row>
                         <Col sm={12} md={8} mdPush={2}>
                             <SearchForm userNameChange={this.userNameChange} submit={this.submitSearch} />
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col sm={12} md={8} mdPush={2}>
+                            <SortForm sortChange={this.sortChange} options={sortOptions} />
                         </Col>
                     </Row>
                     {map(tweets, (t) => {
