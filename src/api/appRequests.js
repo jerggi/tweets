@@ -2,7 +2,7 @@ import { authRequestBearer, authRequestBasic } from './Request'
 import * as c from './data'
 import { TOKEN, put } from '../utils/storage'
 
-export function getTweets(screen_name, count) {
+export function getTweets(screen_name, count = 50) {
     return new Promise((resolve, reject) => {
         authRequestBearer()
             .get('/1.1/statuses/user_timeline.json')

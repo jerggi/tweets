@@ -10,34 +10,34 @@ import * as AppActions from './actions/appActions'
 
 class App extends React.Component {
     componentWillMount() {
-        const { actions: { getTweets } } = this.props
+        const { actions: { getTweetsFromData } } = this.props
 
         let token = get(TOKEN)
 
         if (token === null) {
             Api.getToken().then((res) => {
                 put(TOKEN, res.access_token)
-                getTweets()
+                getTweetsFromData() //temp
             }).catch((err) => {
                 console.error(err)
             })
         } else {
-            getTweets()
+            getTweetsFromData() //temp
         }
     }
 
     render() {
-        const { tweets } = this.props
+        //const { tweets } = this.props
 
         return (
-            <Tweets tweetList={tweets} />
+            <Tweets />
         )
     }
 }
 
 function mapStateToProps(state) {
     return {
-        tweets: state.app.tweets
+        //tweets: state.app.tweets
     }
 }
 
