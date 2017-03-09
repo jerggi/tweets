@@ -1,20 +1,29 @@
 import React from 'react'
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 
-import { get, TOKEN } from '../../utils/storage';
-import * as Api from './api/Twitter.js'
+import { get, put, TOKEN } from './utils/storage'
+import * as Api from './api/appRequests'
 
 import Tweets from './pages/Tweets.js'
-import * as AppActions from './actions/appActions';
+import * as AppActions from './actions/appActions'
 
 class App extends React.Component {
     componentWillMount() {
         const { actions: { getTweets } } = this.props
 
-        let token = JSON.parse(get(TOKEN))
+        let token = get(TOKEN)
 
-        getTweets()
+        if (token === null) {
+            Api.getToken().then((res) => {
+                put(TOKEN, res.access_token)
+                getTweets()
+            }).catch((err) => {
+                console.error(err)
+            })
+        } else {
+            getTweets()
+        }
     }
 
     render() {

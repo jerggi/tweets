@@ -12,7 +12,7 @@ module.exports = {
       hot: true,
       proxy: [
             {
-                context: ['/1.1'],
+                context: ['/1.1', '/oauth'],
                 target: 'https://api.twitter.com',
                 secure: false,
                 changeOrigin: true
