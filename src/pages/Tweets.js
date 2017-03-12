@@ -48,28 +48,16 @@ class Tweets extends React.Component {
         const options = sortOptions[option]
 
         sortTweets(options.sortOption, options.orderOption)
+        this.setState({
+            tweets: this.getFilteredTweets()
+        })
     }
 
     submitFilter() {
-        const { tweets, filters, form: { filterForm } } = this.props
+        const { tweets, form: { filterForm } } = this.props
 
         if (filterForm.values) {
-            let filteredTweets = filter(tweets, (tweet) => {
-                let passed = true
-                forEach(filterForm.values, (value, key) => {
-                    if (value !== null) {
-                        let filter = filters[key].filter
-
-                        let result = filter(tweet, value)
-
-                        if (!result) {
-                            passed = false
-                        }
-                    }
-                })
-
-                return passed
-            })
+            let filteredTweets = this.getFilteredTweets()
 
             this.setState({
                 tweets: filteredTweets
@@ -89,6 +77,31 @@ class Tweets extends React.Component {
         this.setState({
             tweets: tweets
         })
+    }
+
+    getFilteredTweets() {
+        const { tweets, filters, form: { filterForm } } = this.props
+
+        if (filterForm.values) {
+            return filter(tweets, (tweet) => {
+                let passed = true
+                forEach(filterForm.values, (value, key) => {
+                    if (value !== null) {
+                        let filter = filters[key].filter
+
+                        let result = filter(tweet, value)
+
+                        if (!result) {
+                            passed = false
+                        }
+                    }
+                })
+
+                return passed
+            })
+        } else {
+            return tweets
+        }
     }
 
     render() {
