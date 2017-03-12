@@ -34,12 +34,21 @@ export const sortTweets = (sortOption, orderOption) => dispatch => {
     }
 }
 
-//temp
-export const getTweetsFromData = () => dispatch => {
+export const registerFilter = (filter) => ({
+    type: c.REGISTER_FILTER,
+    payload: filter
+})
+
+export const resetFilters = () => dispatch => {
     dispatch({
-        type: c.GET_TWEETS,
-        payload: {
-            tweets: data
-        },
+        type: c.RESET_FILTERS
     })
 }
+
+//temp
+export const getTweetsFromData = () => ({
+    type: c.GET_TWEETS,
+    payload: {
+        tweets: data
+    },
+})

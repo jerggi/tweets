@@ -5,6 +5,7 @@ const initialState = {
     tweets: [],
     sortOption: Options.CREATED_AT,
     orderOption: Options.ASCENDING,
+    filters: {}
 }
 
 const appReducer = (state = initialState, action) => {
@@ -38,6 +39,16 @@ const appReducer = (state = initialState, action) => {
                         return  (time2 - time1) * (action.payload.orderOption === Options.ASCENDING ? 1 : -1)
                     })
                 ]
+            }
+        case c.REGISTER_FILTER:
+            return {
+                ...state,
+                filters: {...state.filters, [action.payload.key]: action.payload}
+            }
+        case c.RESET_FILTERS:
+            return {
+                ...state,
+                filters: []
             }
         default:
             return state

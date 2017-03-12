@@ -27,17 +27,9 @@ class App extends React.Component {
     }
 
     render() {
-        //const { tweets } = this.props
-
         return (
             <Tweets />
         )
-    }
-}
-
-function mapStateToProps(state) {
-    return {
-        //tweets: state.app.tweets
     }
 }
 
@@ -48,6 +40,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(App)
