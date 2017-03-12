@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import { FormControl, Button, Col, Row } from 'react-bootstrap'
 
-const SearchForm = ({ userNameChange, submitSearch }) => {
+const SearchForm = ({ userNameChange, submitSearch, isLoading }) => {
     return (
         <Row>
             <Col sm={8}>
@@ -12,7 +12,7 @@ const SearchForm = ({ userNameChange, submitSearch }) => {
                 />
             </Col>
             <Col sm={4}>
-                <Button bsStyle="primary" onClick={submitSearch}>Search</Button>
+                <Button bsStyle="primary" disabled={isLoading} onClick={submitSearch}>{isLoading ? 'Loading...' : 'Search'}</Button>
             </Col>
         </Row>
     )

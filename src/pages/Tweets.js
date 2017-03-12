@@ -11,6 +11,7 @@ import SearchForm from '../componets/form/Search'
 import SortForm from '../componets/form/Sort'
 import { sortOptions } from '../utils/constants'
 import FilterForm from '../componets/form/filter/Filter'
+import StatsForm from '../componets/form/Stats'
 
 class Tweets extends React.Component {
     constructor(props) {
@@ -18,12 +19,15 @@ class Tweets extends React.Component {
         this.state = {
             userName: '',
             tweets: props.tweets,
+            showStats: false,
+            isLoading: false,
         }
         this.userNameChange = this.userNameChange.bind(this)
         this.submitSearch = this.submitSearch.bind(this)
         this.sortChange = this.sortChange.bind(this)
         this.submitFilter = this.submitFilter.bind(this)
         this.resetFilter = this.resetFilter.bind(this)
+        this.setStatsShowed = this.setStatsShowed.bind(this)
     }
 
     userNameChange(userName) {
@@ -35,9 +39,11 @@ class Tweets extends React.Component {
         const userName = this.state.userName
         
         if (userName) {
+            this.setState({ isLoading: true })
             getTweets(userName).then((tweets) => {
                 this.setState({
-                    tweets: this.props.tweets
+                    tweets: this.props.tweets,
+                    isLoading: false
                 })
             })
         }
@@ -104,15 +110,22 @@ class Tweets extends React.Component {
         }
     }
 
+    setStatsShowed(showed = true) {
+        this.setState({
+            showStats: showed
+        })
+    }
+
     render() {
-        const { tweets } = this.state
+        const { tweets, showStats, isLoading } = this.state
+        const allTweets = this.props.tweets
 
         return (
             <div>
                 <Grid>
                     <Row>
                         <Col sm={12} md={8} mdPush={2}>
-                            <SearchForm userNameChange={this.userNameChange} submitSearch={this.submitSearch} />
+                            <SearchForm userNameChange={this.userNameChange} submitSearch={this.submitSearch} isLoading={isLoading} />
                         </Col>
                     </Row>
                     <Row>
@@ -120,13 +133,21 @@ class Tweets extends React.Component {
                             <SortForm sortChange={this.sortChange} options={sortOptions} />
                         </Col>
                     </Row>
-
                     <Row>
                         <Col sm={12} md={8} mdPush={2}>
                             <FilterForm submitFilter={this.submitFilter} resetFilter={this.resetFilter} />
                         </Col>
                     </Row>
-
+                    <Row>
+                        <Col sm={12} md={8} mdPush={2}>
+                            <Col md={8} >
+                                <h3>Showing {tweets.length} {tweets.length === 1 ? 'tweet' : 'tweets'} from {allTweets.length}</h3>
+                            </Col>
+                            <Col md={4} >
+                                <Button style={{ float: 'right' }}  bsStyle="link" onClick={this.setStatsShowed}>Show stats</Button>
+                            </Col>
+                        </Col>
+                    </Row>
                     {map(tweets, (t) => {
                         return (
                             <div key={t.id_str}>
@@ -139,6 +160,7 @@ class Tweets extends React.Component {
                         )
                     })}
                 </Grid>
+                {showStats && <StatsForm tweets={allTweets} setStatsShowed={this.setStatsShowed} />}
             </div>
         )
     }
