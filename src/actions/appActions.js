@@ -2,9 +2,6 @@ import * as c from './constants'
 import * as Options from '../utils/constants'
 import * as Api from '../api/appRequests'
 
-//temp
-import { data } from '../data'
-
 export const getTweets = (userName) => async dispatch => {
     try {
         const response = await Api.getTweets(userName)
@@ -44,11 +41,3 @@ export const resetFilters = () => dispatch => {
         type: c.RESET_FILTERS
     })
 }
-
-//temp
-export const getTweetsFromData = () => ({
-    type: c.GET_TWEETS,
-    payload: {
-        tweets: data
-    },
-})

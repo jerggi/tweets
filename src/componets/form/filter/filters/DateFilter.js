@@ -48,14 +48,14 @@ class DateFilter extends React.Component {
     render () {
         return (
             <Row>
-                <Col sm={4} >
+                <Col sm={4}>
                     <ControlLabel>Date from</ControlLabel>
-                    <Field name="dateFrom" type="text" component={RenderDatePicker} />
                 </Col>
-                
-                <Col sm={4} >
-                    <ControlLabel>Date to</ControlLabel>
-                    <Field name="dateTo" type="text" component={RenderDatePicker} />
+                <Col sm={4}>
+                    <Field name="dateFrom" type="text" placeholder="From" component={RenderDatePicker} />
+                </Col>
+                <Col sm={4}>
+                    <Field name="dateTo" type="text" placeholder="To" component={RenderDatePicker} />
                 </Col>
             </Row>
         )

@@ -16,6 +16,6 @@ export const RenderNumberField = ({ input, placeholder, min }) => (
 
 export const RenderDatePicker = ({input, placeholder }) => (
   <div>
-        <DatePicker {...input} />
+        <DatePicker {...input} placeholder={placeholder} />
   </div>
 )

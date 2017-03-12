@@ -30,7 +30,7 @@ class MentionMatchFilter extends React.Component {
                 <Col sm={4} >
                     <ControlLabel>Mention</ControlLabel>
                 </Col>
-                <Col sm={4} >
+                <Col sm={8} >
                     <Field name="mentionMatch" component={RenderTextField} />
                 </Col>
             </Row>

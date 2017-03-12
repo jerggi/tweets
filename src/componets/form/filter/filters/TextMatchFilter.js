@@ -23,7 +23,7 @@ class TextMatchFilter extends React.Component {
                 <Col sm={4} >
                     <ControlLabel>Text</ControlLabel>
                 </Col>
-                <Col sm={4} >
+                <Col sm={8} >
                     <Field name="textMatch" component={RenderTextField} />
                 </Col>
             </Row>

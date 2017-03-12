@@ -1,35 +1,23 @@
-/* global __DEVTOOLS__ */
-import { createStore, compose, applyMiddleware } from 'redux';
-import createLogger from 'redux-logger';
+import { createStore, compose, applyMiddleware } from 'redux'
+import createLogger from 'redux-logger'
 
-import thunk from 'redux-thunk';
+import thunk from 'redux-thunk'
 
-import reducers from '../reducers';
+import reducers from '../reducers'
 
 export default function configureStore(initialState = {}) {
-  const logger = createLogger({
-    collapsed: () => true,
-    // diff: true,
-  });
+    const logger = createLogger({
+        collapsed: () => true,
+    })
 
-  let middlewares = [logger, thunk];
+    let middlewares = [logger, thunk]
 
 
-  const finalCreateStore = compose(
-    applyMiddleware(...middlewares),
-  )(createStore);
+    const finalCreateStore = compose(
+        applyMiddleware(...middlewares),
+    )(createStore)
 
-  const store = finalCreateStore(reducers, initialState);
+    const store = finalCreateStore(reducers, initialState)
 
-  /*
-  if (module.hot) {
-    module.hot.accept('../reducers', () => {
-      import('../reducers').then(nextRootReducer => {
-        store.replaceReducer(nextRootReducer.default);
-      });
-    });
-  }
-  */
-
-  return store;
+    return store
 }

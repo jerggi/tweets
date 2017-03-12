@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 import { Field, reduxForm } from 'redux-form'
-import { InputGroup, ControlLabel, Button } from 'react-bootstrap'
+import { InputGroup, ControlLabel, Button, Panel } from 'react-bootstrap'
 
 import DateFilter from './filters/DateFilter'
 import LengthFilter from './filters/LengthFilter'
@@ -12,7 +12,20 @@ import HashtagMatchFilter from  './filters/HashtagMatchFilter'
 
 
 const Form = ({ submitFilter, resetFilter }) => (
-    <div>
+    <Panel 
+        header={(
+            <div>
+                <span>Tweet filter</span>
+                <Button style={{ float: 'right' }} onClick={resetFilter}>Reset filter</Button>
+                <div className="clearfix"></div>
+            </div>
+        )} 
+        footer={(
+            <div>
+                <Button bsStyle="primary" style={{ float: 'right' }} onClick={submitFilter}>Filter</Button>
+                <div className="clearfix"></div>
+            </div>
+    )}>
         <DateFilter />
         <LengthFilter />
         <HashtagCountFilter />
@@ -20,10 +33,7 @@ const Form = ({ submitFilter, resetFilter }) => (
         <TextMatchFilter />
         <MentionMatchFilter />
         <HashtagMatchFilter />
-
-        <Button bsStyle="primary" onClick={submitFilter}>Filter</Button>
-        <Button bsStyle="primary" onClick={resetFilter}>Reset filter</Button>
-    </div>
+    </Panel>
 )
 
 Form.propTypes = {
