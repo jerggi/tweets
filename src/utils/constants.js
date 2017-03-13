@@ -8,17 +8,21 @@ export const sortOptions = {
     "date-asc": {
         sortOption: CREATED_AT,
         orderOption: ASCENDING,
+        label: 'Date (newest)',
     },
     "date-desc": {
         sortOption: CREATED_AT,
         orderOption: DESCENDING,
+        label: 'Date (oldest)',
     },
     "favorite-asc": {
         sortOption: FAVORITE_COUNT,
         orderOption: ASCENDING,
+        label: 'Likes (ascending)'
     },
     "favorite-desc": {
         sortOption: FAVORITE_COUNT,
         orderOption: DESCENDING,
+        label: 'Likes (descending)'
     }
 }

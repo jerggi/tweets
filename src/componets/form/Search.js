@@ -18,4 +18,10 @@ const SearchForm = ({ userNameChange, submitSearch, isLoading }) => {
     )
 }
 
+SearchForm.propTypes = {
+    userNameChange: PropTypes.func,
+    submitSearch: PropTypes.func,
+    isLoading: PropTypes.bool,
+}
+
 export default SearchForm

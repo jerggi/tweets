@@ -10,7 +10,6 @@ import TextMatchFilter from  './filters/TextMatchFilter'
 import MentionMatchFilter from './filters/MentionMatchFilter'
 import HashtagMatchFilter from  './filters/HashtagMatchFilter'
 
-
 const Form = ({ submitFilter, resetFilter }) => (
     <Panel 
         header={(

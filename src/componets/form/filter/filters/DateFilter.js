@@ -52,10 +52,10 @@ class DateFilter extends React.Component {
                     <ControlLabel>Date from</ControlLabel>
                 </Col>
                 <Col sm={4}>
-                    <Field name="dateFrom" type="text" placeholder="From" component={RenderDatePicker} />
+                    <Field name="dateFrom" type="text" placeholder="from" component={RenderDatePicker} />
                 </Col>
                 <Col sm={4}>
-                    <Field name="dateTo" type="text" placeholder="To" component={RenderDatePicker} />
+                    <Field name="dateTo" type="text" placeholder="to" component={RenderDatePicker} />
                 </Col>
             </Row>
         )

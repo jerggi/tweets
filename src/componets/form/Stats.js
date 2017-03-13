@@ -61,4 +61,9 @@ const StatsForm = ({ tweets, setStatsShowed }) => {
     )
 }
 
+StatsForm.propTypes = {
+    tweets: PropTypes.array,
+    setStatsShowed: PropTypes.func,
+}
+
 export default StatsForm

@@ -1,17 +1,12 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { reset } from 'redux-form';
-import Tweet from 'react-tweet'
-import { Grid, Row, Col, Button } from 'react-bootstrap'
-import { map, filter, forEach } from 'lodash'
+import { filter, forEach } from 'lodash'
 
 import * as AppActions from '../actions/appActions'
-import SearchForm from '../componets/form/Search'
-import SortForm from '../componets/form/Sort'
+import TweetsPage from '../componets/Tweets'
 import { sortOptions } from '../utils/constants'
-import FilterForm from '../componets/form/filter/Filter'
-import StatsForm from '../componets/form/Stats'
 
 class Tweets extends React.Component {
     constructor(props) {
@@ -110,7 +105,7 @@ class Tweets extends React.Component {
         }
     }
 
-    setStatsShowed(showed = true) {
+    setStatsShowed(showed) {
         this.setState({
             showStats: showed
         })
@@ -120,50 +115,29 @@ class Tweets extends React.Component {
         const { tweets, showStats, isLoading } = this.state
         const allTweets = this.props.tweets
 
-        return (
-            <div>
-                <Grid>
-                    <Row>
-                        <Col sm={12} md={8} mdPush={2}>
-                            <SearchForm userNameChange={this.userNameChange} submitSearch={this.submitSearch} isLoading={isLoading} />
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col sm={12} md={8} mdPush={2}>
-                            <SortForm sortChange={this.sortChange} options={sortOptions} />
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col sm={12} md={8} mdPush={2}>
-                            <FilterForm submitFilter={this.submitFilter} resetFilter={this.resetFilter} />
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col sm={12} md={8} mdPush={2}>
-                            <Col md={8} >
-                                <h3>Showing {tweets.length} {tweets.length === 1 ? 'tweet' : 'tweets'} from {allTweets.length}</h3>
-                            </Col>
-                            <Col md={4} >
-                                <Button style={{ float: 'right' }}  bsStyle="link" onClick={this.setStatsShowed}>Show stats</Button>
-                            </Col>
-                        </Col>
-                    </Row>
-                    {map(tweets, (t) => {
-                        return (
-                            <div key={t.id_str}>
-                                <Row>
-                                    <Col sm={12} md={8} mdPush={2}>
-                                        <Tweet data={t} />
-                                    </Col>
-                                </Row>
-                            </div>
-                        )
-                    })}
-                </Grid>
-                {showStats && <StatsForm tweets={allTweets} setStatsShowed={this.setStatsShowed} />}
-            </div>
-        )
+        const pageProps = {
+            userNameChange: this.userNameChange,
+            submitSearch: this.submitSearch,
+            sortChange: this.sortChange,
+            submitFilter: this.submitFilter,
+            resetFilter: this.resetFilter,
+            setStatsShowed: this.setStatsShowed,
+            tweets,
+            allTweets,
+            isLoading,
+            showStats,
+        }
+
+        return <TweetsPage {...pageProps} />
     }
+}
+
+Tweets.propTypes = {
+    tweets: PropTypes.array,
+    filters: PropTypes.object,
+    from: PropTypes.object,
+    actions: PropTypes.object,
+    resetForm: PropTypes.func,
 }
 
 function mapStateToProps(state) {
